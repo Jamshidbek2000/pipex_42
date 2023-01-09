@@ -6,65 +6,29 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:59:19 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/07 17:13:23 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/09 10:02:54 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
 
-char	*get_path(char **env)
+void	execute(char *cmd_with_flags, char **env) // "ls -l -a" OR "/bin/ls"
 {
-	int	index;
+	char	**cmd_2d;
+	char	*cmd_path;
+	char	*env_var_path;
 
-	index = 0;
-	while (env[index] != NULL)
+	cmd_2d = ft_split(cmd_with_flags, ' ');
+	if (is_full_path(cmd_2d[0])) // "/bin/ls"
 	{
-		if (ft_strncmp(env[index], "PATH=", 5) == 0)
-			return env[index];
-		index++;
+		cmd_path = cmd_2d[0];
+		execve(cmd_path, cmd_2d, env);
 	}
-	return (NULL);
-}
-
-char *copy_n_chars_to_new_allocated_str(char *string, int index_to_start) {
-    char *new_str;
-
-	int	len;
-	len = ft_strlen(string) - index_to_start + 1;
-	new_str = malloc(len);
-    if (new_str == NULL)
-        return NULL;
-
-    ft_strlcpy(new_str, string + index_to_start, len);
-
-    return new_str;
-}
-
-char	*all_path(char *full_path, char *cmd)
-{
-	char	**all_path;
-	char	*path;
-	int		index;
-
-	index = 0;
-	all_path = ft_split(full_path, ':');
-	while (all_path[index] != NULL)
+	else //"ls -l -a"
 	{
-		if (access(all_path[index], X_OK))
-			return (all_path[index]);
-		path = ft_strjoin(all_path[index], ft_strjoin("/", cmd));
-		if (access(path, X_OK))
-			return (all_path[index]);
-		index++;
+		env_var_path = get_path(env);
+		cmd_path = get_cmd_path(env_var_path, cmd_2d[0]);  // "/Users/jergashe/.brew/bin/ls"
+		execve(cmd_path, cmd_2d, env);
 	}
-	
-	
-}
-
-void	execute(char *cmd_with_flags, char *env)
-{
-	char	**cmd_and_flags;
-
-	cmd_and_flags = ft_split(cmd_with_flags, ' ');
-	
+	ft_free_2d_array((void **)cmd_2d);
 }
