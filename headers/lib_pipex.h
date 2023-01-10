@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/09 17:04:16 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/10 10:29:15 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdio.h>
 
 # include "../libft_42/libft.h"
+# include "../get_next_line_42/get_next_line.h"
 
 char	*get_path(char **env);
 char	*get_cmd_path(char *full_path, char *cmd);
