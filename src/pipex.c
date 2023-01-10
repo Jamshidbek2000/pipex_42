@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:05:06 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/09 10:08:34 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:04:48 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	pipex(char	**argv, char **env)
 	pipe(fd);
 	process_id = fork();
 	if (process_id == -1)
-		return ;
+		return ; // fix
 	else if (process_id == 0)
 	{
 		child_process(fd, argv, env);
@@ -53,6 +53,7 @@ void	pipex(char	**argv, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	check_input(argc, argv, env);
-	pipex(argv, env);
+	// pipex(argv, env);
+	pipex_bonus(argc, argv, env);
 	return (0);
 }

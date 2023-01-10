@@ -1,3 +1,6 @@
 [submodule "libft_42"]
 	path = libft_42
 	url = https://github.com/coderJamshidbek/libft_42.git
+[submodule "get_next_line_42"]
+	path = get_next_line_42
+	url = https://github.com/coderJamshidbek/get_next_line_42.git

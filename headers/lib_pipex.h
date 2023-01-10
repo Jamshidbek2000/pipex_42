@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/09 09:54:42 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/09 17:04:16 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int		check_input(int argc, char **argv, char **env);
 int		is_full_path(char *path);
 
 int		open_file(char *filename, int mode);
+
+void	pipex_bonus(int argc, char **argv, char **env);
 
 
 
