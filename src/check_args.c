@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 12:02:35 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:28:41 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,16 @@ void	nb_of_args_check(int num_of_args)
 
 void	file_exists_check(char *file_name)
 {
+	if (ft_strncmp(file_name, "here_doc", 8) == 0)
+		return ;
     if (access(file_name, F_OK) == -1)
 		exit_with_error(FILE_N_EXIST);
 }
 
 void	file_is_readable_check(char *file_name)
 {
+	if (ft_strncmp(file_name, "here_doc", 8) == 0)
+		return ;
     if (access(file_name, R_OK) == -1)
 		exit_with_error(FILE_N_READABLE);
 }

@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 11:41:58 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:20:42 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define NOT_ENOUGH_ARGS 3
 # define CMD_N_EXIST 4
 # define PATH_N_EXIST 5
+# define NOT_ENOUGH_ARGS2 6
+# define PIPE_ERROR 7
+# define PROCESS_ERROR 7
 
 char	*get_path(char **env);
 char	*get_cmd_path(char *full_path, char *cmd);

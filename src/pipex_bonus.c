@@ -6,33 +6,11 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/10 13:59:50 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/11 14:43:26 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
-
-void	make_here_doc_as_input()
-{
-	int	fd[2];
-	int	process_id;
-
-	if (pipe(fd) == -1)
-		exit(6); // fix
-	process_id = fork();
-	if (process_id == -1)
-		exit(6); // fix
-	else if (process_id == 0)
-	{
-		// execute_here_doc(); 
-	}
-	else
-	{
-		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
-		waitpid(process_id, NULL, 0);
-	}
-}
 
 void	execute_here_doc(char *stop_word, int *fd)
 {
@@ -45,10 +23,32 @@ void	execute_here_doc(char *stop_word, int *fd)
 		if (ft_strncmp(line, stop_word, ft_strlen(stop_word)) == 0)
 		{
 			free(line);
-			break ;
+			return ;
 		}
 		ft_putstr_fd(line, fd[1]);
 		free(line);
+	}
+}
+
+void	make_here_doc_as_input(char **argv)
+{
+	int	fd[2];
+	int	process_id;
+
+	if (pipe(fd) == -1)
+		exit_with_error(PIPE_ERROR); // fix
+	process_id = fork();
+	if (process_id == -1)
+		exit(PROCESS_ERROR); // fix
+	else if (process_id == 0)
+	{
+		execute_here_doc(argv[2], fd); 
+	}
+	else
+	{
+		close(fd[1]);
+		dup2(fd[0], STDIN_FILENO);
+		waitpid(process_id, NULL, 0);
 	}
 }
 
@@ -70,9 +70,9 @@ void	child_process_bonus(char *cmd, char **env)
 	}
 	else
 	{
+		waitpid(process_id, NULL, 0);
 		close(fd[1]);
 		dup2(fd[0], STDIN_FILENO);
-		waitpid(process_id, NULL, 0);
 	}
 }
 
@@ -86,7 +86,7 @@ void	pipex_bonus(int argc, char **argv, char **env)
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0) // here_doc
 	{
 		
-		make_here_doc_as_input(argv[2], fd);
+		make_here_doc_as_input(argv);
 		arg_index = 3;
 	}
 	else // or file_1
