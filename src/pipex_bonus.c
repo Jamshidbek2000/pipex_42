@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/10 11:26:57 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:59:50 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ void	make_here_doc_as_input()
 	}
 }
 
-
 void	execute_here_doc(char *stop_word, int *fd)
 {
 	char	*line;
 
+	close(fd[0]);
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);

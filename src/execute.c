@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:59:19 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/09 10:20:06 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/11 09:33:11 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execute(char *cmd_with_flags, char **env) // "ls -l -a" OR "/bin/ls"
 	if (is_full_path(cmd_2d[0])) // "/bin/ls"
 	{
 		cmd_path = cmd_2d[0];
-		execve(cmd_path, cmd_2d, env);
+		execve(cmd_path, cmd_2d, env); // need to check access()
 	}
 	else //"ls -l -a"
 	{

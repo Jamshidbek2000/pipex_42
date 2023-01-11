@@ -6,14 +6,14 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 10:03:51 by jergashe          #+#    #+#              #
-#    Updated: 2023/01/10 10:20:07 by jergashe         ###   ########.fr        #
+#    Updated: 2023/01/11 10:09:42 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 CC = cc
 RM = rm -rf
-CFLAGS = 
+CFLAGS = -g
 # -Wall -Wextra -Werror
 LIBFT = libft_42/libft.a
 GET_NEXT_LINE = get_next_line_42/get_next_line.a
@@ -23,6 +23,7 @@ SRCS = src/pipex.c	\
 		src/open_file.c	\
 		src/execute.c	\
 		src/get_path.c	\
+		src/errors.c	\
 		src/pipex_bonus.c	\
 
 OBJS = $(SRCS:.c=.o)
