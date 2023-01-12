@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 08:59:17 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:59:42 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	nb_of_args_check(int num_of_args)
 
 void	file_exists_check(char *file_name)
 {
-	if (ft_strncmp(file_name, "here_doc", 8) == 0)
+	if (is_here_doc(file_name))
 		return ;
     if (access(file_name, F_OK) == -1)
 		exit_with_error(FILE_N_EXIST);
@@ -42,7 +42,7 @@ void	file_exists_check(char *file_name)
 
 void	file_is_readable_check(char *file_name)
 {
-	if (ft_strncmp(file_name, "here_doc", 8) == 0)
+	if (is_here_doc(file_name))
 		return ;
     if (access(file_name, R_OK) == -1)
 		exit_with_error(FILE_N_READABLE);
@@ -54,11 +54,10 @@ void	check_cmds(int argc, char **argv, char **env)
 	char	*cmd_path;
 	char	*cmd;
 
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0) // and len of argv[1] == 8?
+	if (is_here_doc(argv[1])) // and len of argv[1] == 8?
 		index = 3;
 	else
 		index = 2;
-
 	while (index < argc - 1)
 	{
 		cmd = get_cmd_without_flags(argv[index]);

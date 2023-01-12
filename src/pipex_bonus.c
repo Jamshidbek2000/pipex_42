@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 08:44:51 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 09:59:05 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pipex_bonus(int argc, char **argv, char **env)
 	pipe(fd);
 	// identify what is going to be STDIN
 	fd[1] = open_file(argv[argc - 1], 2);
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0) // here_doc
+	if (is_here_doc(argv[1])) // here_doc
 	{	
 		make_here_doc_as_input(argv);
 		arg_index = 3;
