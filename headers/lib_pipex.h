@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 14:20:42 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:58:49 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ void	pipex_bonus(int argc, char **argv, char **env);
 
 char	*get_cmd_without_flags(char *cmd_with_flags);
 
+int		is_here_doc(char *input);
 
 #endif

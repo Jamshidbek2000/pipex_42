@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:05:06 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 14:26:43 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:59:39 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,3 @@ void	pipex(char	**argv, char **env)
 	}
 	parent_process(fd, argv, env);
 }
-
-int	main(int argc, char **argv, char **env)
-{
-	check_input(argc, argv, env);
-
-	// pipex(argv, env);
-
-	pipex_bonus(argc, argv, env);
-	printf("-- END --\n");
-	return (0);
-}
-
-
-// cases:
-// cat /dev/urandom | head -10   // infile "cat /dev/urandom" "head -10"
-// cat | cat | ls
-//  fd - 2 for errors
-// infile sleep 10 ls outfile 
-// outfile to be created
-
-// ./pipex in "sleep 100" "sleep 10000" out 
-
-// ./pipex here_doc stop_word cat cat cat cat out_file
-// ./pipex file_name cmd cmd cmd file2_name
- // echo $?

@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 14:43:26 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:44:51 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ void	execute_here_doc(char *stop_word, int *fd)
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
-		if (ft_strncmp(line, stop_word, ft_strlen(stop_word)) == 0)
+		if (ft_strncmp(line, stop_word, ft_strlen(stop_word)) == 0 &&
+			ft_strlen(line) - 1 == ft_strlen(stop_word))
 		{
 			free(line);
-			return ;
+			exit(0);
 		}
 		ft_putstr_fd(line, fd[1]);
 		free(line);
@@ -83,16 +84,15 @@ void	pipex_bonus(int argc, char **argv, char **env)
 
 	pipe(fd);
 	// identify what is going to be STDIN
+	fd[1] = open_file(argv[argc - 1], 2);
 	if (ft_strncmp(argv[1], "here_doc", 8) == 0) // here_doc
-	{
-		
+	{	
 		make_here_doc_as_input(argv);
 		arg_index = 3;
 	}
 	else // or file_1
 	{
 		fd[0] = open_file(argv[1], 0);
-		fd[1] = open_file(argv[argc - 1], 2);
 		dup2(fd[0], STDIN_FILENO);
 		arg_index = 2;
 	}

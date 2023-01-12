@@ -6,14 +6,25 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 14:28:41 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 08:59:17 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
 
 void	check_cmds(int argc, char **argv, char **env);
+void	file_is_readable_check(char *file_name);
+void	file_exists_check(char *file_name);
+void	nb_of_args_check(int num_of_args);
 
+int	check_input(int argc, char **argv, char **env)
+{
+	nb_of_args_check(argc);
+	file_exists_check(argv[1]);
+	file_is_readable_check(argv[1]);
+	check_cmds(argc, argv, env);
+	return (0);
+}
 
 void	nb_of_args_check(int num_of_args)
 {
@@ -37,22 +48,13 @@ void	file_is_readable_check(char *file_name)
 		exit_with_error(FILE_N_READABLE);
 }
 
-int	check_input(int argc, char **argv, char **env)
-{
-	nb_of_args_check(argc);
-	file_exists_check(argv[1]);
-	file_is_readable_check(argv[1]);
-	check_cmds(argc, argv, env);
-	return (0);
-}
-
 void	check_cmds(int argc, char **argv, char **env)
 {
 	int		index;
 	char	*cmd_path;
 	char	*cmd;
 
-	if (ft_strncmp(argv[1], "here_doc", 8) == 0)
+	if (ft_strncmp(argv[1], "here_doc", 8) == 0) // and len of argv[1] == 8?
 		index = 3;
 	else
 		index = 2;
@@ -60,28 +62,16 @@ void	check_cmds(int argc, char **argv, char **env)
 	while (index < argc - 1)
 	{
 		cmd = get_cmd_without_flags(argv[index]);
-		if (is_full_path(cmd))
-		{
-			free(cmd);
-			index++;
-			continue;
-		}
-		
 		cmd_path = get_cmd_path(get_path(env), cmd);
-		
-		if (cmd_path != NULL)
+		if (is_full_path(cmd) || cmd_path != NULL)
 		{
 			free(cmd);
 			free(cmd_path);
 			index++;
 			continue;
 		}
+		free(cmd);
 		free(cmd_path);
 		exit_with_error(CMD_N_EXIST);
 	}
-}
-
-void	check()
-{
-	system("leaks pipex");
 }
