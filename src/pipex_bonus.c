@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 09:59:05 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:36:49 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,10 @@ void	child_process_bonus(char *cmd, char **env)
 	}
 	else
 	{
-		waitpid(process_id, NULL, 0);
+		// waitpid(process_id, NULL, 0);
+		// strerror(status);
 		close(fd[1]);
-		dup2(fd[0], STDIN_FILENO);
+		dup2(fd[0], STDIN_FILENO); 
 	}
 }
 
@@ -100,12 +101,11 @@ void	pipex_bonus(int argc, char **argv, char **env)
 	{
 		child_process_bonus(argv[arg_index++], env);  //./pipex Makefile cat "grep src" "wc -l" out
 	}
+	while (arg_index-- > 0)
+	{
+		printf("WAITING\n");
+		waitpid(-1, NULL, 0);
+	}
 	dup2(fd[1], STDOUT_FILENO);
 	execute(argv[argc - 2], env);
 }
-
-// int	main(int argc, char **argv, char **env)
-// {
-	
-// 	return (0);
-// }

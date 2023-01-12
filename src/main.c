@@ -6,11 +6,15 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 08:59:45 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 09:01:54 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/12 14:35:32 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
+
+
+
+
 
 int	main(int argc, char **argv, char **env)
 {
@@ -22,6 +26,14 @@ int	main(int argc, char **argv, char **env)
 	printf("-- END --\n");
 	return (0);
 }
+
+
+
+
+
+
+
+
 
 
 // cases:
@@ -37,6 +49,7 @@ int	main(int argc, char **argv, char **env)
 // ./pipex file_name cmd cmd cmd file2_name
  // echo $?
 
- // can I use lib errno.h to get error values?
+ // can I use lib bash.h to get error values?
 
- 
+// shoudl the last cmd exit in execve or main: return(0)?
+
