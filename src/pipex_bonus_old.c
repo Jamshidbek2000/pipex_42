@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex_bonus_old.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 08:57:50 by jergashe         ###   ########.fr       */
+/*   Created: 2023/01/16 08:37:33 by jergashe          #+#    #+#             */
+/*   Updated: 2023/01/16 08:37:37 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,36 +52,38 @@ void	last_cmd(char *cmd, char **env, int fd_out)
 	}
 	else
 	{
-		close(STDIN_FILENO);
 		close(fd_out);
 	}
 }
 
 void	pipex_bonus(int argc, char **argv, char **env)
 {
-	int	file_fds[2];
-	int	index_cmd;
-	int	index_last_cmd;
+	int	fd[2];
+	int	arg_index;
+	int temp_fd;
 
-	index_last_cmd = argc - 2;
-	file_fds[1] = open_file(argv[argc - 1], 2);
+	fd[1] = open_file(argv[argc - 1], 2);
+	temp_fd = dup(0);
 	if (is_here_doc(argv[1]))
 	{	
 		make_here_doc_as_input(argv);
-		index_cmd = 3;
+		arg_index = 3;
 	}
 	else
 	{
-		file_fds[0] = open_file(argv[1], 0);
-		dup2(file_fds[0], STDIN_FILENO);
-		close(file_fds[0]);
-		index_cmd = 2;
+		fd[0] = open_file(argv[1], 0);
+		dup2(fd[0], STDIN_FILENO);
+		close(fd[0]);
+		arg_index = 2;
 	}
 
-	while (index_cmd < index_last_cmd)
-		child_process_bonus(argv[index_cmd++], env);  //./pipex Makefile cat "grep src" "wc -l" out
-	last_cmd(argv[index_cmd], env, file_fds[1]);
+	while (arg_index < argc - 2)
+		child_process_bonus(argv[arg_index++], env);  //./pipex Makefile cat "grep src" "wc -l" out
 
+	last_cmd(argv[arg_index], env, fd[1]);
+
+	dup2(temp_fd, 0);
 	while (wait(NULL) > 0);
 
 }
+

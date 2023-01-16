@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:05:35 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 12:02:44 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 09:32:37 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,16 @@ char	*get_cmd_path(char *full_path, char *cmd) // "/Users/jergashe/.brew/bin : /
 	char	**paths_2d;
 	char	*path;
 	int		index;
+	char	*cmd_with_slash;
 
 	index = 0;
 	paths_2d = ft_split(full_path, ':'); // [ : ] [ : ]
 	while (paths_2d[index] != NULL)
 	{
-		path = ft_strjoin(paths_2d[index], ft_strjoin("/", cmd)); 
+		cmd_with_slash = ft_strjoin("/", cmd);
+		path = ft_strjoin(paths_2d[index], cmd_with_slash); 
 		// if path != NULL
+		free(cmd_with_slash);
 		if (access(path, X_OK) == 0)
 		{
 			ft_free_2d_array((void **)paths_2d);
@@ -60,6 +63,7 @@ char	*get_cmd_path(char *full_path, char *cmd) // "/Users/jergashe/.brew/bin : /
 		free(path);
 		index++;
 	}
+	ft_free_2d_array((void **)paths_2d);
 	exit_with_error(CMD_N_EXIST);
 	return (NULL);
 }

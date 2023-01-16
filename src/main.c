@@ -6,13 +6,11 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 08:59:45 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 14:35:32 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 09:18:08 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
-
-
 
 
 
@@ -21,10 +19,15 @@ int	main(int argc, char **argv, char **env)
 	check_input(argc, argv, env);
 
 	// pipex(argv, env);
-
 	pipex_bonus(argc, argv, env);
+
+	// status = pipex();
+	// while (1) ;
+	
+
+	atexit(check);
 	printf("-- END --\n");
-	return (0);
+	// return (status);
 }
 
 

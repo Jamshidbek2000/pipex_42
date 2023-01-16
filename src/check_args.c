@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/12 09:59:42 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/13 10:47:34 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	file_exists_check(char *file_name)
 	if (is_here_doc(file_name))
 		return ;
     if (access(file_name, F_OK) == -1)
-		exit_with_error(FILE_N_EXIST);
+		exit_with_error(ENOENT);
 }
 
 void	file_is_readable_check(char *file_name)
@@ -45,7 +45,7 @@ void	file_is_readable_check(char *file_name)
 	if (is_here_doc(file_name))
 		return ;
     if (access(file_name, R_OK) == -1)
-		exit_with_error(FILE_N_READABLE);
+		exit_with_error(EACCES);
 }
 
 void	check_cmds(int argc, char **argv, char **env)

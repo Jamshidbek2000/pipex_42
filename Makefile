@@ -6,7 +6,7 @@
 #    By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 10:03:51 by jergashe          #+#    #+#              #
-#    Updated: 2023/01/12 09:00:04 by jergashe         ###   ########.fr        #
+#    Updated: 2023/01/16 08:35:20 by jergashe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS = src/pipex.c	\
 		src/errors.c	\
 		src/utils.c	\
 		src/pipex_bonus.c	\
+		src/here_doc.c	\
 		src/main.c	\
 
 OBJS = $(SRCS:.c=.o)
