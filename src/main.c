@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 08:59:45 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 09:18:08 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 10:56:35 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(int argc, char **argv, char **env)
 {
 	check_input(argc, argv, env);
 
-	// pipex(argv, env);
-	pipex_bonus(argc, argv, env);
+	pipex(argv, env);
+	// pipex_bonus(argc, argv, env);
 
 	// status = pipex();
 	// while (1) ;
