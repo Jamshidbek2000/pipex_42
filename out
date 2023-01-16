@@ -1,10 +1,7 @@
-SRCS = src/pipex.c	\
-		src/check_args.c	\
-		src/open_file.c	\
-		src/execute.c	\
-		src/get_path.c	\
-		src/errors.c	\
-		src/utils.c	\
-		src/pipex_bonus.c	\
-		src/here_doc.c	\
-		src/main.c	\
+Makefile
+get_next_line_42
+headers
+libft_42
+out
+pipex
+src

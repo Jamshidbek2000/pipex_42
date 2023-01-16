@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 08:34:50 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 08:36:31 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:37:06 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ void	make_here_doc_as_input(char **argv)
 	int	process_id;
 
 	if (pipe(fd) == -1)
-		exit_with_error(PIPE_ERROR); // fix
+		exit_with_error(PIPE_ERROR);
 	process_id = fork();
 	if (process_id == -1)
-		exit(PROCESS_ERROR); // fix
+		exit(PROCESS_ERROR);
 	else if (process_id == 0)
 	{
-		execute_here_doc(argv[2], fd); 
+		execute_here_doc(argv[2], fd);
 	}
 	else
 	{
@@ -43,8 +43,8 @@ void	execute_here_doc(char *stop_word, int *fd)
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
-		if (ft_strncmp(line, stop_word, ft_strlen(stop_word)) == 0 &&
-			ft_strlen(line) - 1 == ft_strlen(stop_word))
+		if (ft_strncmp(line, stop_word, ft_strlen(stop_word)) == 0
+			&& ft_strlen(line) - 1 == ft_strlen(stop_word))
 		{
 			free(line);
 			exit(0);

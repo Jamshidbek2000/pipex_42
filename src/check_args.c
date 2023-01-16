@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/13 10:47:34 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:56:02 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	file_is_readable_check(char *file_name);
 void	file_exists_check(char *file_name);
 void	nb_of_args_check(int num_of_args);
 
+// check_cmds(argc, argv, env);
 int	check_input(int argc, char **argv, char **env)
 {
 	nb_of_args_check(argc);
 	file_exists_check(argv[1]);
 	file_is_readable_check(argv[1]);
-	check_cmds(argc, argv, env);
 	return (0);
 }
 
@@ -36,7 +36,7 @@ void	file_exists_check(char *file_name)
 {
 	if (is_here_doc(file_name))
 		return ;
-    if (access(file_name, F_OK) == -1)
+	if (access(file_name, F_OK) == -1)
 		exit_with_error(ENOENT);
 }
 
@@ -44,7 +44,7 @@ void	file_is_readable_check(char *file_name)
 {
 	if (is_here_doc(file_name))
 		return ;
-    if (access(file_name, R_OK) == -1)
+	if (access(file_name, R_OK) == -1)
 		exit_with_error(EACCES);
 }
 
@@ -54,7 +54,7 @@ void	check_cmds(int argc, char **argv, char **env)
 	char	*cmd_path;
 	char	*cmd;
 
-	if (is_here_doc(argv[1])) // and len of argv[1] == 8?
+	if (is_here_doc(argv[1]))
 		index = 3;
 	else
 		index = 2;
@@ -67,7 +67,7 @@ void	check_cmds(int argc, char **argv, char **env)
 			free(cmd);
 			free(cmd_path);
 			index++;
-			continue;
+			continue ;
 		}
 		free(cmd);
 		free(cmd_path);

@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:05:35 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 09:32:37 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:35:59 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*get_cmd_without_flags(char *cmd_with_flags)
 	return (cmd);
 }
 
-char	*get_cmd_path(char *full_path, char *cmd) // "/Users/jergashe/.brew/bin : /Users/jergashe/homebrew/bin:" AND "ls"
+char	*get_cmd_path(char *full_path, char *cmd)
 {
 	char	**paths_2d;
 	char	*path;
@@ -48,12 +48,13 @@ char	*get_cmd_path(char *full_path, char *cmd) // "/Users/jergashe/.brew/bin : /
 	char	*cmd_with_slash;
 
 	index = 0;
-	paths_2d = ft_split(full_path, ':'); // [ : ] [ : ]
+	paths_2d = ft_split(full_path, ':');
 	while (paths_2d[index] != NULL)
 	{
 		cmd_with_slash = ft_strjoin("/", cmd);
-		path = ft_strjoin(paths_2d[index], cmd_with_slash); 
-		// if path != NULL
+		path = ft_strjoin(paths_2d[index], cmd_with_slash);
+		if (path == NULL)
+			return (NULL);
 		free(cmd_with_slash);
 		if (access(path, X_OK) == 0)
 		{

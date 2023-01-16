@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:47:45 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/11 13:52:53 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:39:04 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /* O_RDONLY = 0;
 O_WRONLY | O_CREAT | O_APPEND = 1;
 O_WRONLY | O_CREAT | O_TRUNC = 2; */
- int	open_file(char *filename, int mode)
+int	open_file(char *filename, int mode)
 {
 	int	file_fd;
 

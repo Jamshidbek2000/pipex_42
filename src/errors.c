@@ -6,13 +6,13 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:53:16 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/13 10:56:03 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:33:19 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
 
-void	exit_with_error(int	error_ind)
+void	exit_with_error(int error_ind)
 {
 	if (error_ind == ENOENT)
 		ft_putstr_fd("ERROR: FILE DOES NOT EXIST!\n", 2);
