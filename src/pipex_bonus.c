@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 08:57:50 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:06:04 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,41 @@ void	last_cmd(char *cmd, char **env, int fd_out)
 	}
 }
 
+void	ft_wait()
+{
+	int	exit_status;
+	int	process_id;
+	int	status;
+	int signal_number;
+
+	process_id = waitpid(0, &status, 0);
+	while (process_id != -1)
+    {
+        if (WIFEXITED(status))
+		{
+            exit_status = WEXITSTATUS(status);
+            if (exit_status != 0)
+                printf("Child process with pid: %d terminated with non-zero exit status %d\n", process_id, exit_status);
+			else
+				printf("Child process with pid: %d terminated with zero exit status %d\n", process_id, exit_status);
+        }
+		else if (WIFSIGNALED(status))
+		{
+            signal_number = WTERMSIG(status);
+            printf("Child process with pid: %d terminated by signal %d\n", process_id, signal_number);
+		}
+		process_id = waitpid(0, &status, 0);
+	}
+}
+
 void	pipex_bonus(int argc, char **argv, char **env)
 {
 	int	file_fds[2];
 	int	index_cmd;
 	int	index_last_cmd;
+	int	exit_status;
+	int	process_id;
+	int	status;
 
 	index_last_cmd = argc - 2;
 	file_fds[1] = open_file(argv[argc - 1], 2);
@@ -82,6 +112,5 @@ void	pipex_bonus(int argc, char **argv, char **env)
 		child_process_bonus(argv[index_cmd++], env);  //./pipex Makefile cat "grep src" "wc -l" out
 	last_cmd(argv[index_cmd], env, file_fds[1]);
 
-	while (wait(NULL) > 0);
-
+	ft_wait();
 }

@@ -6,11 +6,33 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:05:06 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 14:01:53 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:07:39 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
+
+void	child_process_1(int *pipe_fds, char *file_in_name,char *cmd, char **env);
+void	child_process_2(int *pipe_fds, char *file_in_name,char *cmd, char **env);
+void	ft_wait();
+
+void	pipex(char	**argv, char **env)
+{
+	int		pipe_fds[2];
+
+	if (pipe(pipe_fds) == -1)
+		exit (1);
+	
+	child_process_1(pipe_fds, argv[1], argv[2], env);
+	child_process_2(pipe_fds, argv[4], argv[3], env);
+	
+	ft_wait();
+	
+	close(pipe_fds[0]);
+	close(pipe_fds[1]);
+
+}
+
 
 void	child_process_1(int *pipe_fds, char *file_in_name,char *cmd, char **env)
 {
@@ -58,23 +80,13 @@ void	child_process_2(int *pipe_fds, char *file_out_name, char *cmd, char **env)
 	}
 }
 
-void	pipex(char	**argv, char **env)
+void	ft_wait()
 {
-	int		pipe_fds[2];
-	int		status;
-	int		exit_status;
-	int		process_id;
+	int	exit_status;
+	int	process_id;
+	int	status;
+	int signal_number;
 
-	if (pipe(pipe_fds) == -1)
-		exit (1);
-	
-
-	child_process_1(pipe_fds, argv[1], argv[2], env);
-	child_process_2(pipe_fds, argv[4], argv[3], env);
-	
-	close(pipe_fds[0]);
-	close(pipe_fds[1]);
-	
 	process_id = waitpid(0, &status, 0);
 	while (process_id != -1)
     {
@@ -88,12 +100,11 @@ void	pipex(char	**argv, char **env)
         }
 		else if (WIFSIGNALED(status))
 		{
-            int signal_number = WTERMSIG(status);
+            signal_number = WTERMSIG(status);
             printf("Child process with pid: %d terminated by signal %d\n", process_id, signal_number);
 		}
 		process_id = waitpid(0, &status, 0);
 	}
 }
-
 
 // if (WEFEXITED(status))
