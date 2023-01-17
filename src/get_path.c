@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:05:35 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 14:35:59 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:19:51 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ char	*get_cmd_path(char *full_path, char *cmd)
 		index++;
 	}
 	ft_free_2d_array((void **)paths_2d);
-	exit_with_error(CMD_N_EXIST);
-	return (NULL);
+	// exit_with_error(CMD_N_EXIST);
+	// exit(127);
+	return (ft_strdup(cmd));
 }
 
 int	is_full_path(char *path)

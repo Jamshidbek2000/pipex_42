@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 14:53:40 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/17 14:11:53 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <errno.h>
+# include <string.h>
 
 # include <stdio.h>
 
@@ -34,11 +35,11 @@ char	*get_cmd_path(char *full_path, char *cmd);
 
 void	execute(char *cmd_with_flags, char **env);
 
-int		check_input(int argc, char **argv, char **env);
+void		check_input(int argc, char **argv, char **env);
 
 int		is_full_path(char *path);
 
-int		open_file(char *filename, int mode);
+int	open_file(char *file_name, int mode, char *cmd);
 
 void	exit_with_error(int	error_ind);
 

@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 14:21:48 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 14:56:55 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/17 09:49:53 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pipex_bonus(int argc, char **argv, char **env)
 	int	index_last_cmd;
 
 	index_last_cmd = argc - 2;
-	file_fds[1] = open_file(argv[argc - 1], 2);
+	file_fds[1] = open_file(argv[argc - 1], 2, argv[argc - 2]);
 	if (is_here_doc(argv[1]))
 	{	
 		make_here_doc_as_input(argv);
@@ -30,10 +30,10 @@ void	pipex_bonus(int argc, char **argv, char **env)
 	}
 	else
 	{
-		file_fds[0] = open_file(argv[1], 0);
+		index_cmd = 2;
+		file_fds[0] = open_file(argv[1], 0, argv[index_cmd]);
 		dup2(file_fds[0], STDIN_FILENO);
 		close(file_fds[0]);
-		index_cmd = 2;
 	}
 	while (index_cmd < index_last_cmd)
 		child_process_bonus(argv[index_cmd++], env);
