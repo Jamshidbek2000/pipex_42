@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:59:19 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 14:29:09 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 08:49:50 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,14 @@ void	execute(char *cmd_with_flags, char **env)
 	}
 	else
 	{
-		// check_cmd(cmd_with_flags, env);
 		env_var_path = get_path(env);
 		cmd_path = get_cmd_path(env_var_path, cmd_2d[0]);
-		// dprintf(2, "PATH %s\n", cmd_path);
-		if (execve(cmd_path, cmd_2d, env) == -1)
-			exit(ENOENT);
+		if (cmd_path == NULL)
+		{
+			ft_free_2d_array((void **)cmd_2d);
+			cmd_not_found_exit(cmd_with_flags);
+		}
+		else if (execve(cmd_path, cmd_2d, env) != -1)
+			exit(-1);
 	}
-	ft_free_2d_array((void **)cmd_2d);
-}
-
-void	check_cmd(char *cmd_with_flags, char **env)
-{
-	char	*cmd_path;
-	char	*cmd;
-	char	*error_msg;
-
-	cmd = get_cmd_without_flags(cmd_with_flags);
-	cmd_path = get_cmd_path(get_path(env), cmd);
-	if (cmd_path == NULL)
-	{
-		error_msg = ft_strjoin("command not found: ", cmd);
-		error_msg = ft_strjoin_free_1(error_msg, "\n");
-		// perror(error_msg);
-		free(error_msg);
-		free(cmd);
-		free(cmd_path);
-		exit(127);
-	}
-	free(cmd);
-	free(cmd_path);
 }

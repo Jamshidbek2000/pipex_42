@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/09 08:47:45 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 09:44:55 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 08:37:44 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	open_file(char *file_name, int mode, char *cmd)
 		file_fd = open(file_name, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	else if (mode == 2)
 		file_fd = open(file_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (file_fd == -1)
+	if (file_fd == -1) // experiment with wait exit status
 	{
 		cmd_only = get_cmd_without_flags(cmd);
 		error_msg = ft_strjoin_free_1(cmd_only, ": ");

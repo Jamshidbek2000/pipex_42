@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 14:11:53 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:41:26 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,33 +25,33 @@
 # include "../get_next_line_42/get_next_line.h"
 
 # define NOT_ENOUGH_ARGS 107
-# define CMD_N_EXIST 127
-# define NOT_ENOUGH_ARGS2 6
-# define PIPE_ERROR 7
-# define PROCESS_ERROR 7
-
-char	*get_path(char **env);
-char	*get_cmd_path(char *full_path, char *cmd);
-
-void	execute(char *cmd_with_flags, char **env);
-
-void		check_input(int argc, char **argv, char **env);
-
-int		is_full_path(char *path);
-
-int	open_file(char *file_name, int mode, char *cmd);
-
-void	exit_with_error(int	error_ind);
+# define PIPE_ERROR 108
+# define PROCESS_ERROR 109
 
 void	pipex(char **argv, char **env);
 void	pipex_bonus(int argc, char **argv, char **env);
 
+void	check_input(int argc, char **argv, char **env);
+void	check(void);
+
+void	exit_with_error(int	error_ind);
+void	cmd_not_found_exit(char *cmd_with_flags);
+
+char	*get_path(char **env);
+char	*get_cmd_path(char *full_path, char *cmd);
 char	*get_cmd_without_flags(char *cmd_with_flags);
+int		is_full_path(char *path);
+
+void	execute(char *cmd_with_flags, char **env);
+
+int		open_file(char *file_name, int mode, char *cmd);
 
 void	make_here_doc_as_input(char **argv);
 void	execute_here_doc(char *stop_word, int *fd);
 int		is_here_doc(char *input);
 
-void	check(void);
 void	ft_wait(void);
+int		is_first_cmd_and_not_here_doc(char **argv, int index);
+int		set_file_1_as_stdin(char **argv, int index);
+
 #endif

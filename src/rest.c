@@ -72,3 +72,32 @@
 // 		index++;
 // 	}
 // }
+
+
+
+
+
+// void	child_process_bonus(char *cmd, char **env, int is_first)
+// {
+// 	int	fd[2];
+// 	int	process_id;
+
+// 	if (pipe(fd) == -1)
+// 		return ;
+// 	process_id = fork();
+// 	if (process_id == -1)
+// 		return ;
+// 	else if (process_id == 0)
+// 	{
+// 		close(fd[0]);
+// 		dup2(fd[1], STDOUT_FILENO);
+// 		close(fd[1]);
+// 		execute(cmd, env);
+// 	}
+// 	else
+// 	{
+// 		close(fd[1]);
+// 		dup2(fd[0], STDIN_FILENO);
+// 		close(fd[0]);
+// 	}
+// }

@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 08:56:35 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 14:30:54 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 10:45:14 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,13 @@ void	ft_wait(void)
 	int	signal_number;
 
 	process_id = waitpid(0, &status, 0);
-	// dprintf(2 ,"PROCESS ID %d\n", process_id);	
 	while (process_id != -1)
 	{
 		if (WIFEXITED(status))
 		{
-				// printf("Child process with pid: %d terminated with non-zero exit status %d\n", process_id, exit_status);
 			exit_status = WEXITSTATUS(status);
-			if (exit_status != 0)
-				dprintf(2, "%s\n", strerror(exit_status));
+			if (exit_status != 0 && exit_status > 106)
+				dprintf(2, "My error: %s with exit status %d\n", strerror(exit_status), exit_status);
 			else
 				printf("Child process with pid: %d terminated with zero exit status %d\n", process_id, exit_status);
 		}
@@ -38,8 +36,27 @@ void	ft_wait(void)
 			printf("Child process with pid: %d terminated by signal %d\n", process_id, signal_number);
 		}
 		process_id = waitpid(0, &status, 0);
-		// dprintf(2, "PROCESS ID %d\n", process_id);
 	}
+}
+
+int	is_first_cmd_and_not_here_doc(char **argv, int index)
+{
+	if (is_here_doc(argv[1]) == 0 && index == 2)
+		return (1);
+	return (0);
+}
+
+int	set_file_1_as_stdin(char **argv, int index)
+{
+	int		file_in_fd;
+	char	*cmd;
+	char	*file_name;
+
+	file_name = argv[1];
+	cmd = argv[index];
+	file_in_fd = open_file(file_name, 0, argv[index]);
+	dup2(file_in_fd, STDIN_FILENO);
+	return (file_in_fd);
 }
 
 void	check(void)
@@ -54,14 +71,15 @@ void	check(void)
 // 	int	status;
 // 	int	signal_number;
 
-// 	while ((process_id = waitpid(-1, &status, 0)) != -1)
+// 	process_id = waitpid(0, &status, 0);
+// 	dprintf(2 ,"\t\tPROCESS WITH ID %d EXITED\n", process_id);
+// 	while (process_id != -1)
 // 	{
-// 		// process_id = waitpid(0, &status, 0);
 // 		if (WIFEXITED(status))
 // 		{
 // 			exit_status = WEXITSTATUS(status);
-// 			if (exit_status != 0)
-// 				printf("Child process with pid: %d terminated with non-zero exit status %d\n", process_id, exit_status);
+// 			if (exit_status != 0 && exit_status > 106)
+// 				dprintf(2, "My error: %s with exit status %d\n", strerror(exit_status), exit_status);
 // 			else
 // 				printf("Child process with pid: %d terminated with zero exit status %d\n", process_id, exit_status);
 // 		}
@@ -70,5 +88,7 @@ void	check(void)
 // 			signal_number = WTERMSIG(status);
 // 			printf("Child process with pid: %d terminated by signal %d\n", process_id, signal_number);
 // 		}
+// 		process_id = waitpid(0, &status, 0);
+// 		dprintf(2 ,"\t\tPROCESS WITH ID %d EXITED\n", process_id);
 // 	}
 // }
