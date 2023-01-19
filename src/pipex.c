@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:05:06 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 14:05:20 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:45:03 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,14 @@
 
 void	process_1(int *pipe_fds, char *file_in_name, char *cmd, char **env);
 void	process_2(int *pipe_fds, char *file_in_name, char *cmd, char **env);
+void	pipex(char	**argv, char **env);
+
+int	main(int argc, char **argv, char **env)
+{
+	check_input(argc);
+	pipex(argv, env);
+	return (0);
+}
 
 void	pipex(char	**argv, char **env)
 {
@@ -44,7 +52,6 @@ void	process_1(int *pipe_fds, char *file_in_name, char *cmd, char **env)
 		close(file_in_fd);
 		dup2(pipe_fds[1], STDOUT_FILENO);
 		close(pipe_fds[1]);
-		// dprintf(2, "1 = %d\n", getpid());
 		execute(cmd, env);
 	}
 }
@@ -65,9 +72,6 @@ void	process_2(int *pipe_fds, char *file_out_name, char *cmd, char **env)
 		close(file_out_fd);
 		dup2(pipe_fds[0], STDIN_FILENO);
 		close(pipe_fds[0]);
-		// dprintf(2, "2 = %d\n", getpid());
 		execute(cmd, env);
-		// dprintf(2, "2 = %d\n", getpid());
 	}
 }
-// if (WEFEXITED(status))

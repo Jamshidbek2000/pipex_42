@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/17 09:51:22 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 13:44:27 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	nb_of_args_check(int num_of_args);
 
-void	check_input(int argc, char **argv, char **env)
+void	check_input(int argc)
 {
 	nb_of_args_check(argc);
 }

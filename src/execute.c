@@ -6,13 +6,11 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 14:59:19 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/18 08:49:50 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:55:56 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/lib_pipex.h"
-
-void	check_cmd(char *cmd_with_flags, char **env);
 
 void	execute(char *cmd_with_flags, char **env)
 {

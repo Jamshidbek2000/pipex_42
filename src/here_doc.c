@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 08:34:50 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/16 14:37:06 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/19 08:15:40 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,14 @@ void	execute_here_doc(char *stop_word, int *fd)
 		ft_putstr_fd(line, fd[1]);
 		free(line);
 	}
+	close(fd[1]);
+}
+
+int	is_first_cmd_and_not_here_doc(char **argv, int index)
+{
+	if (is_here_doc(argv[1]) == 0 && index == 2)
+		return (1);
+	return (0);
 }
 
 // Function returns 1 if input is here_doc

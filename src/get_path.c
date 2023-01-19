@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:05:35 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/18 08:27:33 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/18 11:37:28 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_cmd_path(char *full_path, char *cmd)
 	{
 		cmd_with_slash = ft_strjoin("/", cmd);
 		path = ft_strjoin(paths_2d[index], cmd_with_slash);
-		if (path == NULL) // checking allocation
+		if (path == NULL)
 			return (NULL);
 		free(cmd_with_slash);
 		if (access(path, X_OK) == 0)
