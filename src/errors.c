@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/11 08:53:16 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/18 10:52:02 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/20 08:14:00 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	exit_with_error(int error_ind)
 {
-	if (error_ind == NOT_ENOUGH_ARGS)
-		ft_putstr_fd("ERROR: NOT ENOUGH ARGS\nENTER AT LEAST 4 ARGS!\n", 2);
+	if (error_ind == WRONG_INPUT)
+		ft_putstr_fd("ERROR: WRONG NUMBER OF ARGC\nENTER 5 ARGS!\n", 2);
 	else if (PIPE_ERROR)
 		ft_putstr_fd("PIPE FAILED!\n", 2);
 	else if (PROCESS_ERROR)

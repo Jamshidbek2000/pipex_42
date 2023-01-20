@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/16 08:34:50 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/19 08:15:40 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/01/19 10:08:21 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	make_here_doc_as_input(char **argv)
 		exit_with_error(PIPE_ERROR);
 	process_id = fork();
 	if (process_id == -1)
-		exit(PROCESS_ERROR);
+		exit_with_error(PROCESS_ERROR);
 	else if (process_id == 0)
 	{
 		execute_here_doc(argv[2], fd);
@@ -47,6 +47,7 @@ void	execute_here_doc(char *stop_word, int *fd)
 			&& ft_strlen(line) - 1 == ft_strlen(stop_word))
 		{
 			free(line);
+			close(fd[1]);
 			exit(0);
 		}
 		ft_putstr_fd(line, fd[1]);
