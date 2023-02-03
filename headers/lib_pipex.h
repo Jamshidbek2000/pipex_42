@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 10:06:24 by jergashe          #+#    #+#             */
-/*   Updated: 2023/01/20 08:13:48 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:11:41 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <errno.h>
 
 # include "../libft_42/libft.h"
-# include "../get_next_line_42/get_next_line.h"
 
 # define WRONG_INPUT 107
 # define PIPE_ERROR 108
