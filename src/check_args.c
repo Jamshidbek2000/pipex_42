@@ -6,7 +6,7 @@
 /*   By: jergashe <jergashe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/08 15:04:22 by jergashe          #+#    #+#             */
-/*   Updated: 2023/02/03 10:40:49 by jergashe         ###   ########.fr       */
+/*   Updated: 2023/02/03 10:50:45 by jergashe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,3 +24,4 @@ void	nb_of_args_check(int num_of_args)
 	if (num_of_args != 5)
 		exit_with_error(WRONG_INPUT);
 }
+// exit(1);
