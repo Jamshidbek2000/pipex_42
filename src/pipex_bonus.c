@@ -18,7 +18,6 @@ void	pipex_bonus(int argc, char **argv, char **env);
 
 int	main(int argc, char **argv, char **env)
 {
-	check_input(argc);
 	pipex_bonus(argc, argv, env);
 	return (0);
 }
